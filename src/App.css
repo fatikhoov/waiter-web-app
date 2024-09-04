@@ -1,0 +1,141 @@
+:root {
+  --my-border-radius: 8px;
+  --my-margin: 8px;
+  --my-padding: 16px 8px;
+
+  --my-box-shadow-header: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px; 
+  --my-box-shadow-footer: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+  --my-background-color: #282c34; 
+  --my-background-color-white:#a5a5a5;
+
+  --my-color-container: #ffffff;
+  --my-color-container-black: #282c34;
+  --my-color-accent: #61dafb;
+}
+
+.App {
+  margin: var(--my-margin); 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.App-header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  box-shadow: var(--my-box-shadow-header);
+  background-color: var(--my-background-color);
+  color: var(--my-color-container);
+}
+.App-main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 32px;  
+  
+  color: var(--my-color-container);
+  background-color: var(--my-background-color);
+}
+.App-footer {
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--my-box-shadow-footer);
+  background-color: var(--my-background-color);
+  color: var(--my-color-container);
+}
+
+.App-header div:last-child {
+  text-align: right;
+}
+.header-auth {
+  width: 100%;
+}
+.header-auth .header-auth-title {
+  text-align: center;
+}
+ 
+
+.app-container { 
+  border-radius: var(--my-border-radius); 
+  padding: var(--my-padding); 
+}
+
+.main-financial-state {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between; 
+  /* border-bottom: #ccc6 1px solid; */
+}
+
+.main-financial-state span {
+  flex: 1 1 0px;
+  padding: 2px;
+}
+
+/* .main-financial-state p:nth-child(2) {
+  border-left: #ccc6 1px solid;
+  border-right: #ccc6 1px solid;
+} */
+
+.main-financial-state-titles {
+  display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: #ccc6 1px solid;
+    text-align: left;
+}
+
+.main-financial-state-titles span:first-child {
+  width: 100%;
+  font-size: 14px;
+}
+
+.main-financial-state-titles span:last-child {
+  color: var(--my-color-accent);
+  font-size: 18px;
+}
+
+.main-add-working-shift {
+  margin-top: auto;
+}
+
+header p {
+  flex: 1 1 0px;
+}
+
+.header-profile {
+  text-align: left;
+  margin: 0 8px;
+}
+ 
+
+ 
+.burger {
+  position: absolute;
+  right: 4px;
+  top: 8px; 
+  }
+.burger:after {
+  content: '\2807';
+  font-size: 24px; 
+  width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  color: var(--my-color-accent); 
+}
+
+button {
+  background-color: var(--my-color-accent);
+}
+ 
