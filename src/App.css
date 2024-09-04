@@ -6,7 +6,7 @@
   --my-box-shadow-header: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px; 
   --my-box-shadow-footer: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
-  --my-background-color: #282c34; 
+  --my-background-color: #353535; 
   --my-background-color-white:#a5a5a5;
 
   --my-color-container: #ffffff;
@@ -14,12 +14,22 @@
   --my-color-accent: #61dafb;
 }
 
+.css-1q964xs-MuiFormLabel-root-MuiInputLabel-root {
+  color: rgba(247, 247, 247, 1) !important;
+}
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border-color: rgba(247, 247, 247, 1) !important;
+}
+.css-18pjc51-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  border-color: rgba(247, 247, 247, .8) !important;
+}
+
 .App {
   margin: var(--my-margin); 
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 32px;
 }
 
 .App-header {
