@@ -4,9 +4,10 @@
   --my-padding: 16px 8px;
 
   --my-box-shadow-header: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px; 
-  --my-box-shadow-footer: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  --my-box-shadow-footer: rgba(50, 50, 93, 0.25) 0px 0px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
   --my-background-color: #353535; 
+  --my-background-color-footer: #35353580; 
   --my-background-color-white:#a5a5a5;
 
   --my-color-container: #ffffff;
@@ -29,19 +30,24 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 32px;
+  min-height: calc(100vh - var(--my-margin) * 2) !important;
 }
 
 .App-header {
   position: relative;
   display: flex;
+  height: 80px;
+  min-width: 320px;
+  width: auto;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
   box-shadow: var(--my-box-shadow-header);
-  background-color: var(--my-background-color);
+  background-color: var(--my-background-color-footer);
   color: var(--my-color-container);
 }
 .App-main {
@@ -50,7 +56,7 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 32px;  
-  
+  flex-grow: 1;
   color: var(--my-color-container);
   background-color: var(--my-background-color);
 }
@@ -58,8 +64,10 @@
   display: flex;
   flex-direction: column;
   box-shadow: var(--my-box-shadow-footer);
-  background-color: var(--my-background-color);
+  background-color: inherit;
   color: var(--my-color-container);
+  min-height: 100px;
+  width: auto;
 }
 
 .App-header div:last-child {

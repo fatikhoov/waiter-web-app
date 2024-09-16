@@ -1,17 +1,47 @@
-import TextField from '@mui/material/TextField';
+import * as React from 'react';
+import { AppProvider, SignInPage } from '@toolpad/core';
+import { createTheme } from '@mui/material/styles';
+import { useColorSchemeShim } from './ThemeContext';
+import { getDesignTokens } from './brandingTheme';
 
-export default function AuthPage({onClick, children}) {
-    
-    return (
-        <main className="App-main app-container">
-         <p>Форма входа</p>
-         <TextField id="outlined-login" label="Логин" variant="outlined" color="primary" focused />
-         <TextField id="outlined-password" label="Пароль" variant="outlined" color="primary" />
-         <button className="main-add-working-shift" onClick={onClick}>
-           {children}
-         </button>
+const providers = [
+  { id: 'google', name: 'Google' },
+  { id: 'credentials', name: 'Email and Password' },
+];
 
-       </main>   
-    )
+// Фиктивная функция входа, которая вызывает переданную функцию handleIsAuth
+const signIn = async (provider, handleIsAuth) => {
+  const promise = new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(`Sign in with ${provider.id}`);
+      handleIsAuth();  // Вызываем функцию, которая изменяет состояние авторизации
+      resolve();
+    }, 500);
+  });
+  return promise;
+};
+
+export default function ThemeSignInPage({ handleIsAuth }) {
+  const { mode, systemMode } = useColorSchemeShim();
+  const calculatedMode = (mode === 'system' ? systemMode : mode) ?? 'light';
+  const brandingDesignTokens = getDesignTokens(calculatedMode);
+
+  const THEME = createTheme({
+    ...brandingDesignTokens,
+    palette: {
+      ...brandingDesignTokens.palette,
+      mode: calculatedMode,
+    },
+  });
+
+  // Передаем функцию handleIsAuth в signIn
+  const handleSignIn = (provider) => {
+    signIn(provider, handleIsAuth);
+  };
+
+  return (
+    <AppProvider theme={THEME}>
+      <SignInPage signIn={handleSignIn} providers={providers} />
+    </AppProvider>
+  );
 }
- 
