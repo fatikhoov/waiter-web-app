@@ -1,53 +1,94 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import './App.css';
-import ThemeSignInPage from "./pages/auth/auth";
+import SignInPage from "./pages/auth/SignInPage";
+import MenuAppBar from "./components/Header"; // Импортируем Header
+import FinancialReport from "./components/FinancialReport";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+// Изначальное состояние пользователя
+const initialUserState = {
+  me: { name: '', surname: '', phone: '', email: '' },
+  restaurant: { name: '', address: '' },
+  finances: { balance: null, salary: null, tips: null, salesPercentage: null },
+  workSchedule: { shifts: [] }
+};
 
 function App() {
   const [isAuth, setIsAuth] = useState(false); // Изначально пользователь не авторизован
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(initialUserState);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Функция, которая меняет состояние авторизации
+  const theme = useMemo(() => createTheme({
+    palette: {
+      mode: isDarkMode ? 'dark' : 'light',
+    },
+  }), [isDarkMode]);
+
+  // Функция входа
   const handleIsAuth = () => {
-    setIsAuth(true);  // Пользователь авторизован
-    setUser({ name: 'Иван Иванов', balance: 500000 }); // Фиктивный пользователь
+    setIsAuth(true);
+    updateUserProfile({ me: { name: 'Иван', surname: 'Иванов' } });
+    updateFinances({ salary: 2000, tips: 500 });
+  };
+
+  // Функция выхода
+  const handleLogout = () => {
+    setIsAuth(false);
+    setUser(initialUserState); // Сброс данных
+  };
+
+  // Функция переключения темы
+  const toggleTheme = () => {
+    setIsDarkMode(prevMode => !prevMode);
+  };
+
+  // Обновление данных профиля
+  const updateUserProfile = (newData) => {
+    setUser(prevState => ({
+      ...prevState,
+      me: {
+        ...prevState.me,
+        ...newData.me
+      }
+    }));
+  };
+
+  // Обновление финансовых данных
+  const updateFinances = (newFinances) => {
+    setUser(prevState => ({
+      ...prevState,
+      finances: {
+        ...prevState.finances,
+        ...newFinances
+      }
+    }));
   };
 
   return (
-    <div className="App">
-      <header className="App-header app-container">
-        { 
-          isAuth && user 
-          ? <div className="header-profile"> 
-              <p>Сыроварня Митино</p>
-              <p>{user.name}</p>
-              <p>Баланс {user.balance} &#8381;</p>
-            </div>
-          : <ThemeSignInPage handleIsAuth={handleIsAuth} />  // Передаем handleIsAuth в ThemeSignInPage
-        }
-      </header>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <MenuAppBar 
+          auth={isAuth} // Передаем состояние авторизации
+          handleLogout={handleLogout} // Передаем функцию выхода
+          user={user} // Передаем данные пользователя
+          toggleTheme={toggleTheme} // Передаем функцию переключения темы
+          isDarkMode={isDarkMode} // Передаем состояние темы
+        />
 
-      { 
-        isAuth 
-        ? <main className="App-main app-container">
-            <p>Подробный отчет по доходам</p>
-            <div className="main-financial-wrapper">
-              <div className="main-financial-state">
-                <p className="main-financial-state-titles"><span>Оклад</span>  <span>2.000 &#8381;</span> <span>&equiv;</span></p>
-                <p className="main-financial-state-titles"><span>Чаевые</span> <span>7.000 &#8381;</span> <span>&equiv;</span></p>
-                <p className="main-financial-state-titles"><span>% с продаж</span> <span>5.000 &#8381;</span> <span>&equiv;</span></p>
-              </div>
-            </div>
-            <button className="main-add-working-shift">
-              Ввести смену
-            </button>
-          </main> 
-        : null
-      }
+        {isAuth ? (
+          <main className="App-main app-container">
+            <FinancialReport user={user} />
+            <button className="main-add-working-shift">Ввести смену</button>
+          </main>
+        ) : (
+          <SignInPage handleIsAuth={handleIsAuth} />
+        )}
 
-      <footer className="App-footer app-container">
-        <p></p>
-      </footer>
-    </div>
+        <footer className="App-footer app-container">
+          <p></p>
+        </footer>
+      </div>
+    </ThemeProvider>
   );
 }
 
