@@ -1,9 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import './App.css';
 import SignInPage from "./pages/auth/SignInPage";
 import MenuAppBar from "./components/Header"; // Импортируем Header
 import FinancialReport from "./components/FinancialReport";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+ 
+import { useTheme } from './theme/theme'; // Импорт хука для управления темой
 
 // Изначальное состояние пользователя
 const initialUserState = {
@@ -18,30 +20,22 @@ function App() {
   const [user, setUser] = useState(initialUserState);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const theme = useMemo(() => createTheme({
-    palette: {
-      mode: isDarkMode ? 'dark' : 'light',
-    },
-  }), [isDarkMode]);
-
+  const theme = useTheme(isDarkMode);
   // Функция входа
   const handleIsAuth = () => {
     setIsAuth(true);
     updateUserProfile({ me: { name: 'Иван', surname: 'Иванов' } });
     updateFinances({ salary: 2000, tips: 500 });
   };
-
   // Функция выхода
   const handleLogout = () => {
     setIsAuth(false);
     setUser(initialUserState); // Сброс данных
   };
-
   // Функция переключения темы
   const toggleTheme = () => {
     setIsDarkMode(prevMode => !prevMode);
   };
-
   // Обновление данных профиля
   const updateUserProfile = (newData) => {
     setUser(prevState => ({
@@ -52,7 +46,6 @@ function App() {
       }
     }));
   };
-
   // Обновление финансовых данных
   const updateFinances = (newFinances) => {
     setUser(prevState => ({
@@ -81,7 +74,7 @@ function App() {
             <button className="main-add-working-shift">Ввести смену</button>
           </main>
         ) : (
-          <SignInPage handleIsAuth={handleIsAuth} />
+          <SignInPage handleIsAuth={handleIsAuth} isDarkMode={isDarkMode} />
         )}
 
         <footer className="App-footer app-container">

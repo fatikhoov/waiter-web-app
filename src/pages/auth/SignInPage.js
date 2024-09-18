@@ -1,58 +1,17 @@
-import { AppProvider, SignInPage } from '@toolpad/core';
-import { createTheme } from '@mui/material/styles';
-import { getDesignTokens } from './brandingTheme';
-import { useColorSchemeShim } from './ThemeContext'; 
-import TextField from '@mui/material/TextField';
-import LoadingButton from '@mui/lab/LoadingButton';
-import Link from '@mui/material/Link';
-
-const providers = [
-  { id: 'google', name: 'Google' },
-  { id: 'credentials', name: 'Email and Password' },
-];
-// Кастомизация компонентов и текстов
-const slotProps = {
-  emailField: {
-    variant: 'outlined',
-    label: 'Почта',
-    placeholder: 'Enter your email',
-  },
-  passwordField: {
-    variant: 'outlined',
-    label: 'Password',
-    placeholder: 'Enter your password',
-  },
-  submitButton: {
-    variant: 'contained',
-    color: 'primary',
-    loading: false,
-    children: 'фыв Sign In',
-  },
-  forgotPasswordLink: {
-    children: 'Forgot Password?',
-    href: '#forgot-password',
-  },
-  signUpLink: {
-    children: 'Don\'t have an account? Sign Up',
-    href: '#sign-up',
-  },
-};
-
-const slots = {
-  emailField: TextField,
-  passwordField: TextField,
-  submitButton: LoadingButton,
-  forgotPasswordLink: Link,
-  signUpLink: Link,
-};
+import { AppProvider, SignInPage } from '@toolpad/core'; 
+import { useTheme } from '../../theme/theme'; // Импорт хука для управления темой
+import { Box } from '@mui/material';
+import { BRANDING, providers, slotProps, slots } from './ThemeContext';  
+ 
   
-const SignInPageComponent = ({ handleIsAuth }) => {
+const SignInPageComponent = ({  handleIsAuth, isDarkMode }) => {
+  const theme = useTheme(isDarkMode); // Получаем объект темы в зависимости от режима
 
     const signIn = async (provider) => {
         try {
           return new Promise((resolve) => {
             setTimeout(() => {
-              console.log(`Signed in with ${provider.name}`);
+              console.log(`Вход выполнен ${provider.name}`);
               handleIsAuth();
               resolve();
             }, 500);
@@ -63,25 +22,28 @@ const SignInPageComponent = ({ handleIsAuth }) => {
         }
       };
       
-
-  const { mode, systemMode } = useColorSchemeShim();
-  const calculatedMode = mode === 'system' ? systemMode : mode || 'light';
-  const theme = createTheme({
-    ...getDesignTokens(calculatedMode),
-    palette: {
-      mode: calculatedMode,
-    },
-  }); 
-
-
+ 
   return (
-    <AppProvider theme={theme}>
+    <AppProvider branding={BRANDING} theme={theme}>
+      
+        <Box
+          sx={{
+            width: '100%',
+            maxWidth: 400, // максимальная ширина формы
+            p: 3, // отступы
+            boxShadow: 3, // тень
+            borderRadius: 2, // скругленные углы
+            backgroundColor: 'background.paper',
+          }}
+        >
       <SignInPage
         signIn={signIn}
         providers={providers}
         slotProps={slotProps}
         slots={slots}
       />
+      </Box>
+
     </AppProvider>
   );
 };

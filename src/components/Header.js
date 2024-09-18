@@ -5,35 +5,28 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import MenuIcon from '@mui/icons-material/Menu'; 
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import Switch from '@mui/material/Switch';
-import { useTheme, useMediaQuery } from '@mui/material';
+import Switch from '@mui/material/Switch'; 
+import AccountSlots from './AccountSlots';
 
 export default function MenuAppBar({ auth, handleLogout, user, toggleTheme, isDarkMode }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const theme = useTheme();
-  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+   
 
   const handleMenuNav = (event) => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleClose = () => { 
     setAnchorElNav(null);
   };
 
   return (
-    <AppBar position="static">
-      <Toolbar>
+    <AppBar position="static" >
+      <Toolbar >
         
           <IconButton
             size="large"
@@ -57,7 +50,7 @@ export default function MenuAppBar({ auth, handleLogout, user, toggleTheme, isDa
             aria-label="theme switch"
           />
           {auth && (
-            <div>
+           /*  <div>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -86,7 +79,8 @@ export default function MenuAppBar({ auth, handleLogout, user, toggleTheme, isDa
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
-            </div>
+            </div> */
+            <AccountSlots />
           )}
         </Box>
       </Toolbar>

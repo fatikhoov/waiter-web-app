@@ -160,9 +160,14 @@ button {
 .css-18pjc51-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
   border-color: rgba(247, 247, 247, .8) !important;
 }
-.MuiBox-root.css-nosrnw {
+.MuiBox-root.css-nosrnw, .css-binzgt {
   margin: 0 !important;
 }
-.MuiContainer-root { 
-  background-color: var(--my-background-color-white); 
+.MuiBox-root.css-0 {
+  display: flex;
+  flex-direction: column;
+}
+
+.css-1m4ksqy-MuiTypography-root, .css-we1dys-MuiTypography-root {
+  display: none;
 }
