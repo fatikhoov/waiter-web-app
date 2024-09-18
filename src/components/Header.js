@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu';
 import Switch from '@mui/material/Switch'; 
 import AccountSlots from './AccountSlots';
 
-export default function MenuAppBar({ auth, handleLogout, user, toggleTheme, isDarkMode }) {
+export default function MenuAppBar({ auth, handleIsAuth, handleLogout, user, toggleTheme, isDarkMode }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
    
@@ -27,8 +27,27 @@ export default function MenuAppBar({ auth, handleLogout, user, toggleTheme, isDa
   return (
     <AppBar position="static" >
       <Toolbar >
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Switch
+              checked={isDarkMode}
+              onChange={toggleTheme}
+              aria-label="theme switch"
+            /> 
+          </Box>
+          
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            ОФИК БАЛАНС
+          </Typography>
         
-          <IconButton
+          
+          {auth ? (
+                <AccountSlots
+                user={user}
+                isAuth={auth} 
+                handleLogout={handleLogout}
+            />
+            )
+          : ( <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -37,52 +56,8 @@ export default function MenuAppBar({ auth, handleLogout, user, toggleTheme, isDa
             onClick={handleMenuNav}
           >
             <MenuIcon />
-          </IconButton>
-        
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          {auth ? `Welcome, ${user.me.name}` : 'ОФИК БАЛАНС'}
-        </Typography>
-        
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Switch
-            checked={isDarkMode}
-            onChange={toggleTheme}
-            aria-label="theme switch"
-          />
-          {auth && (
-           /*  <div>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </Menu>
-            </div> */
-            <AccountSlots />
-          )}
-        </Box>
+        </IconButton>)
+          }
       </Toolbar>
       <Menu
         id="menu-nav"
@@ -98,8 +73,7 @@ export default function MenuAppBar({ auth, handleLogout, user, toggleTheme, isDa
         }}
         open={Boolean(anchorElNav)}
         onClose={handleClose}
-      >
-        {/* Add navigation menu items here */}
+      > 
         <MenuItem onClick={handleClose}>Dashboard</MenuItem>
       </Menu>
     </AppBar>

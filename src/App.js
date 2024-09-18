@@ -1,8 +1,10 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import WelcomePage from './pages/WelcomePage'; // Создайте этот компонент 
+
 import { useState } from 'react';
 import './App.css';
-import SignInPage from "./pages/auth/SignInPage";
+import SignInPage from "./pages/auth/SignInPage"
 import MenuAppBar from "./components/Header"; // Импортируем Header
-import FinancialReport from "./components/FinancialReport";
 import { ThemeProvider } from '@mui/material/styles';
  
 import { useTheme } from './theme/theme'; // Импорт хука для управления темой
@@ -24,8 +26,8 @@ function App() {
   // Функция входа
   const handleIsAuth = () => {
     setIsAuth(true);
-    updateUserProfile({ me: { name: 'Иван', surname: 'Иванов' } });
-    updateFinances({ salary: 2000, tips: 500 });
+    updateUserProfile({ me: { name: 'Иван', surname: 'Иванов', email: 'vl.fatikhov@gmail.com' } });
+    updateFinances({ salary: 2000, tips: 500, balance: 15000 });
   };
   // Функция выхода
   const handleLogout = () => {
@@ -59,28 +61,28 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Router> 
       <div className="App">
         <MenuAppBar 
           auth={isAuth} // Передаем состояние авторизации
           handleLogout={handleLogout} // Передаем функцию выхода
+          handleIsAuth={handleIsAuth}
           user={user} // Передаем данные пользователя
           toggleTheme={toggleTheme} // Передаем функцию переключения темы
           isDarkMode={isDarkMode} // Передаем состояние темы
         />
 
-        {isAuth ? (
-          <main className="App-main app-container">
-            <FinancialReport user={user} />
-            <button className="main-add-working-shift">Ввести смену</button>
-          </main>
-        ) : (
-          <SignInPage handleIsAuth={handleIsAuth} isDarkMode={isDarkMode} />
-        )}
-
-        <footer className="App-footer app-container">
-          <p></p>
-        </footer>
-      </div>
+          <Routes>
+            <Route path="/" 
+            element={<WelcomePage auth={isAuth} user={user} isDarkMode={isDarkMode} />} /> 
+            <Route 
+              path="/sign-in" 
+              element={<SignInPage 
+              handleIsAuth={handleIsAuth} 
+              isDarkMode={isDarkMode} 
+            />} />
+            </Routes>          
+      </div></Router>
     </ThemeProvider>
   );
 }

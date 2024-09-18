@@ -2,26 +2,27 @@ import * as React from 'react';
 import { Account, AuthenticationContext, SessionContext } from '@toolpad/core';
 import CustomMenuItems from './CustomMenu';
 
-const demoSession = {
-  user: {
-    name: 'Bharat Kashyap',
-    email: 'bharatkashyap@outlook.com',
-    image: 'https://avatars.githubusercontent.com/u/19550456',
-  },
-};
+ 
 
-export default function AccountSlots() {
+export default function AccountSlots({ user, isAuth, handleLogout }) {
+  const demoSession = {
+    user: {
+      name: user.me.name,
+      email: `${user.finances.balance} руб.`,
+      image: '/images/logo-signin.svg',
+    },
+  };
   const [session, setSession] = React.useState(demoSession);
-  const authentication = React.useMemo(() => {
-    return {
-      signIn: () => {
-        setSession(demoSession);
-      },
-      signOut: () => {
-        setSession(null);
-      },
-    };
-  }, []);
+ 
+  const authentication = React.useMemo(() => ({
+    signIn: () => {
+      /* setSession(demoSession); */
+    },
+    signOut: () => {
+      setSession(null); 
+      handleLogout()
+    },
+  }), [handleLogout]);
 
   return (
     <AuthenticationContext.Provider value={authentication}>
