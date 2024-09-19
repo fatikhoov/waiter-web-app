@@ -25,6 +25,7 @@
   align-items: center;
   gap: 32px;
   min-height: calc(100vh - var(--my-margin) * 2) !important;
+  overflow: hidden;
 }
 
 .App-header {

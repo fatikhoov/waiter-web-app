@@ -7,7 +7,7 @@ import AccountSlots from './AccountSlots'
 import MuiAppBar from '@mui/material/AppBar';
 import { styled } from '@mui/material';
 
-const drawerWidth = 320;
+const drawerWidth = 220;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -29,7 +29,7 @@ const AppBar = styled(MuiAppBar, {
 
 const CustomAppBar = ({ open, handleLogout, handleDrawerOpen, auth, user, isDarkMode, toggleTheme  }) => {
   return (
-    <AppBar position="fixed" open={open}>
+    <AppBar position="fixed" open={open} >
       <Toolbar>
         <IconButton
           color="inherit"

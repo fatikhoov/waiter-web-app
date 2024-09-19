@@ -13,7 +13,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 import { Link } from 'react-router-dom';
 
-const drawerWidth = 320;
+const drawerWidth = 220;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -89,7 +89,7 @@ const CustomDrawer = ({ open, handleDrawerClose, auth, user, isDarkMode, toggleT
     <Divider />
   
     <List>
-      {['О приложении', 'Запросить доступ'].map((text, index) => (
+      {['О приложении'].map((text, index) => (
         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
           <ListItemButton
             sx={[
@@ -138,11 +138,7 @@ const CustomDrawer = ({ open, handleDrawerClose, auth, user, isDarkMode, toggleT
           </ListItemButton>
         </ListItem>
       ))} 
-    </List> 
-    
-    <Divider />
-     
-    <List>
+   
     <ListItem disablePadding sx={{ display: 'block' }}>
       <Link to="/sign-in" style={{ textDecoration: 'none' }}> {/* Убираем подчеркивание ссылки */}
         <ListItemButton
@@ -178,7 +174,7 @@ const CustomDrawer = ({ open, handleDrawerClose, auth, user, isDarkMode, toggleT
             <InboxIcon />
           </ListItemIcon>
           <ListItemText
-            primary='Вход в личный кабинет'
+            primary='Личный кабинет'
             sx={[
               open
                 ? {
@@ -191,10 +187,58 @@ const CustomDrawer = ({ open, handleDrawerClose, auth, user, isDarkMode, toggleT
           />
         </ListItemButton>
       </Link>
-    </ListItem>  
+      <Link to="https://t.me/vladislav_fatikhov/?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5,%20%D1%85%D0%BE%D1%87%D1%83%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%20%D0%B2%20%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20%C2%AB%D0%9E%D0%A4%D0%98%D0%9A%20%D0%92%20%D0%91%D0%90%D0%9B%D0%90%D0%9D%D0%A1%D0%95%C2%BB" style={{ textDecoration: 'none' }}> {/* Убираем подчеркивание ссылки */}
+        <ListItemButton
+          sx={[
+            {
+              minHeight: 48,
+              px: 2.5,
+            },
+            open
+              ? {
+                  justifyContent: 'initial',
+                }
+              : {
+                  justifyContent: 'center',
+                },
+          ]}
+        >
+          <ListItemIcon
+            sx={[
+              {
+                minWidth: 0,
+                justifyContent: 'center',
+              },
+              open
+                ? {
+                    mr: 3,
+                  }
+                : {
+                    mr: 'auto',
+                  },
+            ]}
+          >
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary='Получить доступ'
+            sx={[
+              open
+                ? {
+                    opacity: 1,
+                  }
+                : {
+                    opacity: 0,
+                  },
+            ]}
+          />
+        </ListItemButton>
+      </Link>
+    </ListItem>
     </List>
-    
-    <FormControlLabel checked={isDarkMode} onChange={toggleTheme} control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />} label="Настройка цвета" />  
+    <Divider />
+  
+    <FormControlLabel checked={isDarkMode} onChange={toggleTheme} control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />} label="Настройки" />  
   
   </Drawer>
   );
