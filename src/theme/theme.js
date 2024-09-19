@@ -7,14 +7,14 @@ const theme = (mode) => createTheme({
   palette: {
     mode,
     primary: {
-      main: '#C4A58E', // Капучино
+      main: '#001e3c', // Капучино
     },
     secondary: {
-      main: '#D8D2CB', // Серый бежевый
+      main: '#F7F5F2', // Сливочный белый
     },
     background: {
-      default: '#F0E4D7', // Пудра
-      paper: '#F7F5F2',   // Сливочный белый
+      default: '#fff', // Пудра F0E4D7 / Серый бежевый D8D2CB
+      paper: '#ccc',   // Серый
     },
     text: {
       primary: '#3A3A3A', // Основной цвет текста
@@ -24,8 +24,20 @@ const theme = (mode) => createTheme({
   typography: {
     fontFamily: 'Roboto, sans-serif',
   },
+  cssVariables: {
+    colorSchemeSelector: 'data-toolpad-color-scheme',
+  }, 
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 600,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
 });
-
+ 
 // Хук для управления темой
 export const useTheme = (isDarkMode) => {
   return useMemo(() => theme(isDarkMode ? 'dark' : 'light'), [isDarkMode]);

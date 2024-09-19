@@ -1,10 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import WelcomePage from './pages/WelcomePage'; // Создайте этот компонент 
+import MiniDrawer from './modules/Drawer';
 
 import { useState } from 'react';
 import './App.css';
 import SignInPage from "./pages/auth/SignInPage"
-import MenuAppBar from "./components/Header"; // Импортируем Header
 import { ThemeProvider } from '@mui/material/styles';
  
 import { useTheme } from './theme/theme'; // Импорт хука для управления темой
@@ -18,7 +17,7 @@ const initialUserState = {
 };
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false); // Изначально пользователь не авторизован
+  const [auth, setIsAuth] = useState(false); // Изначально пользователь не авторизован
   const [user, setUser] = useState(initialUserState);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -62,24 +61,28 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router> 
-      <div className="App">
-        <MenuAppBar 
-          auth={isAuth} // Передаем состояние авторизации
-          handleLogout={handleLogout} // Передаем функцию выхода
-          handleIsAuth={handleIsAuth}
-          user={user} // Передаем данные пользователя
-          toggleTheme={toggleTheme} // Передаем функцию переключения темы
-          isDarkMode={isDarkMode} // Передаем состояние темы
-        />
+      <div className="App"> 
 
           <Routes>
             <Route path="/" 
-            element={<WelcomePage auth={isAuth} user={user} isDarkMode={isDarkMode} />} /> 
+            element={<MiniDrawer 
+            auth={auth} 
+            user={user} 
+            isDarkMode={isDarkMode} 
+            handleLogout={handleLogout} 
+            handleIsAuth={handleIsAuth}
+            toggleTheme={toggleTheme}
+           
+            />} /> 
             <Route 
               path="/sign-in" 
               element={<SignInPage 
-              handleIsAuth={handleIsAuth} 
+              auth={auth} 
+              user={user} 
               isDarkMode={isDarkMode} 
+              handleLogout={handleLogout} 
+              handleIsAuth={handleIsAuth}
+              toggleTheme={toggleTheme}
             />} />
             </Routes>          
       </div></Router>
