@@ -8,21 +8,39 @@ export default function AccountSlots({ auth, handleIsAuth, handleLogout, user, t
   
   const [session, setSession] = React.useState(null);
   
-  const authentication = React.useMemo(() => ({ 
-    signIn: () => {
-      auth && setSession({
+  // Обновляем session при изменении auth или user
+  React.useEffect(() => {
+    if (auth && user) {
+      setSession({
         user: {
-        name: user.me.name,
-        email: `${user.finances.balance} руб.`,
-        image: '/images/logo-signin.svg',
-      }});
+          name: user.me.name,
+          email: `${user.finances.balance} руб.`,
+          image: '/images/logo-signin.svg',
+        },
+      });
+    } else {
+      setSession(null);
+    }
+  }, [auth, user]);
+
+
+  const authentication = React.useMemo(() => ({
+    signIn: () => {
+      if (auth) {
+        setSession({
+          user: {
+            name: user.me.name,
+            email: `${user.finances.balance} руб.`,
+            image: '/images/logo-signin.svg',
+          },
+        });
+      }
     },
     signOut: () => {
-      setSession(null); 
-      handleLogout()
+      setSession(null);
+      handleLogout();
     },
   }), [auth, user, handleLogout]);
-
    
 
   return ( 

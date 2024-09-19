@@ -3,6 +3,8 @@ import MiniDrawer from './modules/Drawer';
 
 import { useState } from 'react';
 import './App.css';
+import FinancialReport from './components/FinancialReport'
+import WelcomePage from './pages/WelcomePage'
 import SignInPage from "./pages/auth/SignInPage"
 import { ThemeProvider } from '@mui/material/styles';
  
@@ -58,34 +60,20 @@ function App() {
     }));
   };
 
+ 
   return (
     <ThemeProvider theme={theme}>
       <Router> 
-      <div className="App"> 
-
-          <Routes>
-            <Route path="/" 
-            element={<MiniDrawer 
-            auth={auth} 
-            user={user} 
-            isDarkMode={isDarkMode} 
-            handleLogout={handleLogout} 
-            handleIsAuth={handleIsAuth}
-            toggleTheme={toggleTheme}
-           
-            />} /> 
-            <Route 
-              path="/sign-in" 
-              element={<SignInPage 
-              auth={auth} 
-              user={user} 
-              isDarkMode={isDarkMode} 
-              handleLogout={handleLogout} 
-              handleIsAuth={handleIsAuth}
-              toggleTheme={toggleTheme}
-            />} />
-            </Routes>          
-      </div></Router>
+        <div className="App"> 
+         <Routes> 
+          <Route path="/" element={<MiniDrawer auth={auth} user={user} isDarkMode={isDarkMode} handleLogout={handleLogout} handleIsAuth={handleIsAuth} toggleTheme={toggleTheme} />}>
+            <Route index element={<WelcomePage auth={auth} user={user} isDarkMode={isDarkMode} />} /> {/* Главная страница */}
+            <Route path="lk" element={<FinancialReport  user={user} />} />
+            <Route path="sign-in" element={<SignInPage  auth={auth} user={user} isDarkMode={isDarkMode} handleLogout={handleLogout} handleIsAuth={handleIsAuth} toggleTheme={toggleTheme} />} /> 
+          </Route>
+         </Routes>          
+        </div>
+      </Router>
     </ThemeProvider>
   );
 }

@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router-dom'; // Импортируем хук
 const SignInPageComponent = ({ auth, handleIsAuth, handleLogout, user, toggleTheme, isDarkMode }) => {
   const theme = useTheme(isDarkMode); // Получаем объект темы в зависимости от режима
   const navigate = useNavigate(); // Получаем функцию для навигации
-
-   
+ 
       const signIn = async (provider) => {
         const promise = new Promise((resolve) => {
           setTimeout(() => { 

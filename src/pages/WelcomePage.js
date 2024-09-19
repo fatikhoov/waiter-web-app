@@ -1,12 +1,10 @@
 // WelcomePage.js
 import { Link } from 'react-router-dom';
-import FinancialReport from "../components/FinancialReport";
-import MiniDrawer from '../modules/Drawer';
+import FinancialReport from "../components/FinancialReport"; 
 
 const WelcomePage = ({ auth, user, isDarkMode }) => {
   return (
-    <div className="App">
-      <MiniDrawer/>
+    <div className="App"> 
       { auth ? <FinancialReport auth={auth} user={user} isDarkMode={isDarkMode} />
       : (<div>
         <h1>Добро пожаловать в приложение!</h1>
