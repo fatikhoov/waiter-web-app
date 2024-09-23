@@ -2,12 +2,12 @@ import React from 'react';
 import { Toolbar, IconButton, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountSlots from './AccountSlots'; 
-import { Box } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
  
 
 const CustomAppBar = ({ open, handleLogout, toggleDrawer, auth, user, isDarkMode, toggleTheme }) => {
   return (
-    <Box position="fixed" open={open}>
+    <AppBar position="fixed" open={open}>
       <Toolbar>
         <IconButton
           color="inherit"
@@ -19,18 +19,16 @@ const CustomAppBar = ({ open, handleLogout, toggleDrawer, auth, user, isDarkMode
         </IconButton>
         <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
           ОФИК В БАЛАНСЕ
-        </Typography>
-        {auth && (
+        </Typography> 
           <AccountSlots
             auth={auth}
             user={user}
             handleLogout={handleLogout}
             toggleTheme={toggleTheme}
             isDarkMode={isDarkMode}
-          />
-        )}
+          /> 
       </Toolbar>
-    </Box>
+    </AppBar>
   );
 };
 
