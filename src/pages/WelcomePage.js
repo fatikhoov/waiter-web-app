@@ -12,7 +12,7 @@ const WelcomePage = ({ auth, user, isDarkMode }) => {
     <div className="App"> 
       { auth ? <FinancialReport auth={auth} user={user} isDarkMode={isDarkMode} />
       : (<>
-        <h1>Добро пожаловать в приложение!</h1>
+        <h1>Добро пожаловать!</h1>
         <p>Здесь вы можете отслеживать свои доходы и управлять финансами.</p>
           
         <Stack direction="row" spacing={2}>

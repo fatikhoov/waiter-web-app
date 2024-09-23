@@ -24,8 +24,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 32px;
-  min-height: calc(100vh - var(--my-margin) * 2) !important;
   overflow: hidden;
+  padding: 16px 8px;
 }
 
 .App-header {
@@ -149,7 +149,26 @@ button {
   background-color: var(--my-color-accent);
 }
  
-
+@media (max-width: 640px) {
+  .css-193iwg-MuiStack-root {
+    flex-direction: column !important;
+    gap: 16px;
+    align-items: center;
+  }
+  .App h1 {
+    margin: 0 !important;
+    font-size: 24px !important;
+  }
+  .App p {
+    font-size: 14px !important;
+  }
+  .css-193iwg-MuiStack-root>:not(style)~:not(style) {
+    margin-left: 0 !important;
+  }
+  .css-1atu8p7-MuiPaper-root {
+    padding: 8px;
+  }
+}
 
 
 .css-1q964xs-MuiFormLabel-root-MuiInputLabel-root {

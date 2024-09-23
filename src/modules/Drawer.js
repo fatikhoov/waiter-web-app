@@ -36,7 +36,7 @@ export default function MiniDrawer({ auth, user, handleLogout, toggleTheme, isDa
       <CustomAppBar  open={open}  handleDrawerOpen={handleDrawerOpen} handleLogout={handleLogout} auth={auth}  user={user}  isDarkMode={isDarkMode}  toggleTheme={toggleTheme}  />
       {matches && <CustomDrawer  open={open}  handleDrawerClose={handleDrawerClose} auth={auth}  user={user}  isDarkMode={isDarkMode}  toggleTheme={toggleTheme}  />}
       
-      <Box component="main" sx={{ flexGrow: 1 }} style={{ margin: '86px 0' }} > 
+      <Box component="main" sx={{ flexGrow: 1 }} style={{ margin: '42px 0' }} > 
       <Paper sx={{ width: '100%' }}> 
         <Outlet />
       </Paper>  
