@@ -14,7 +14,14 @@ import { useTheme } from './theme/theme'; // Импорт хука для упр
 const initialUserState = {
   me: { name: '', surname: '', phone: '', email: '' },
   restaurant: { name: '', address: '' },
-  finances: { balance: null, salary: null, tips: null, salesPercentage: null },
+  finances: {
+    monthNow: null,
+    salary: null,
+    workDays: null,
+    tips: null,
+    salesPercentage: null,
+    sales: null
+   },
   workSchedule: { shifts: [] }
 };
 
@@ -22,14 +29,30 @@ function App() {
   const [auth, setIsAuth] = useState(false); // Изначально пользователь не авторизован
   const [user, setUser] = useState(initialUserState);
   const [isDarkMode, setIsDarkMode] = useState(false);
-
   const theme = useTheme(isDarkMode);
+
   // Функция входа
   const handleIsAuth = () => {
     setIsAuth(true);
-    updateUserProfile({ me: { name: 'Иван', surname: 'Иванов', email: 'vl.fatikhov@gmail.com' } });
-    updateFinances({ salary: 2000, tips: 500, balance: 15000 });
+    updateUserProfile({ 
+        name: 'Иван', 
+        surname: 'Иванов', 
+        email: 'vl.fatikhov@gmail.com'
+    });
+    updateFinances({ 
+      monthNow: 10,
+      salary: 2000, //оклад
+      workDays: 5, //количество отработанных смен
+      tips: 500, //чаевые
+      salesPercentage: 1.5, //процент
+      sales: 200000 //выручка 
+    });
+    updateRestaurant({
+      name: 'Сыроварня Митино', 
+      address: 'Дубравная 51'
+    })
   };
+
   // Функция выхода
   const handleLogout = () => {
     setIsAuth(false);
@@ -39,16 +62,27 @@ function App() {
   const toggleTheme = () => {
     setIsDarkMode(prevMode => !prevMode);
   };
+
   // Обновление данных профиля
-  const updateUserProfile = (newData) => {
+  const updateUserProfile = (newMe) => {
     setUser(prevState => ({
       ...prevState,
       me: {
         ...prevState.me,
-        ...newData.me
+        ...newMe
       }
     }));
   };
+  // Обновление данных о ресторане
+  const updateRestaurant = (newRestaurant) => {
+    setUser(prevState => ({
+      ...prevState,
+      restaurant: {
+        ...prevState.restaurant,
+        ...newRestaurant
+      }
+    }))
+  }
   // Обновление финансовых данных
   const updateFinances = (newFinances) => {
     setUser(prevState => ({

@@ -2,30 +2,31 @@
 import FinancialReport from "../components/FinancialReport"; 
 
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import TelegramIcon from '@mui/icons-material/Telegram';
-import Stack from '@mui/material/Stack';
+
 
 
 const WelcomePage = ({ auth, user, isDarkMode }) => {
   return (
-    <div className="App"> 
+    <> 
       { auth ? <FinancialReport auth={auth} user={user} isDarkMode={isDarkMode} />
       : (<>
         <h1>Добро пожаловать!</h1>
         <p>Здесь вы можете отслеживать свои доходы и управлять финансами.</p>
           
-        <Stack direction="row" spacing={2}>
-      <Button href="/sign-in" variant="contained" startIcon={<AccountCircleIcon color="secondary" fontSize="small" />}>
-        Личый кабинет
+        <Stack style={{ alignSelf: 'center' }} direction="column" width={'max-content'} spacing={'16px'}>
+      <Button href="/sign-in" variant="contained" startIcon={<AccountCircleIcon color="white" fontSize="small" />}>
+        Войти в личый кабинет
       </Button>
-      <Button href="/sign-up" variant="outlined" startIcon={<TelegramIcon color="primary" fontSize="small" />}>
+      <Button href="https://t.me/vladislav_fatikhov?text=Хочу%20доступ%20в%личный%20кабинет%20приложения" variant="outlined" startIcon={<TelegramIcon color="primary" fontSize="small" />}>
         Получить доступ
       </Button>
     </Stack>
         </>)
     } 
-      </div>
+      </>
   );
 };
 

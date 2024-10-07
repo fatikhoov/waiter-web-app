@@ -6,7 +6,6 @@ import CustomDrawer from '../components/CustomDrawer';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { useDemoRouter } from '@toolpad/core/internals';
 import { useTheme } from '../theme/theme';
-import Paper from '@mui/material/Paper';
 import { Outlet } from 'react-router-dom'; // Импортируем Outlet
 
 export default function MiniDrawer({ auth, user, handleLogout, toggleTheme, isDarkMode }) {
@@ -31,10 +30,22 @@ export default function MiniDrawer({ auth, user, handleLogout, toggleTheme, isDa
       <CustomAppBar  open={open}  toggleDrawer={toggleDrawer} handleLogout={handleLogout} auth={auth}  user={user}  isDarkMode={isDarkMode}  toggleTheme={toggleTheme}  />
       <CustomDrawer  open={open}  toggleDrawer={toggleDrawer} auth={auth}  user={user}  isDarkMode={isDarkMode}  toggleTheme={toggleTheme}  />
       
-      <Box component="main" sx={{ flexGrow: 1 }} style={{ margin: '42px 0' }} > 
-      <Paper sx={{ width: '100%' }}> 
+      <Box 
+        component="main" 
+        sx={{ 
+          flexGrow: 1, 
+          boxShadow: 3,
+          maxWidth: 400,
+          width: '100%', 
+          padding: 2,
+          borderRadius: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px'
+          }}
+        style={{ margin: '72px 16px 32px 16px' }} 
+      > 
         <Outlet />
-      </Paper>  
     </Box>
     
     </AppProvider> 

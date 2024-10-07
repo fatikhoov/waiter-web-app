@@ -46,11 +46,13 @@ export default function AccountSlots({ auth, handleIsAuth, handleLogout, user, t
   return ( 
     <AuthenticationContext.Provider value={authentication} >
       <SessionContext.Provider value={session}>
-        <Account
-          slots={{
-            menuItems: CustomMenuItems,
-          }}
-        />
+        <div style={{ background: '#fff', borderRadius: 10 }}>
+          <Account
+            slots={{
+              menuItems: CustomMenuItems,
+            }}
+          />
+        </div>
       </SessionContext.Provider>
     </AuthenticationContext.Provider>
   );

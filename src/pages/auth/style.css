@@ -1,0 +1,30 @@
+.MuiBox-root.css-1jd0a0t > .MuiTypography-h5,
+.MuiBox-root.css-1jd0a0t > .MuiTypography-body2 {
+    display: none !important;
+}
+form > .MuiFormControlLabel-root.MuiFormControlLabel-labelPlacementEnd.css-1g3g8d2-MuiFormControlLabel-root {
+    display: none;
+}
+
+.MuiBox-root.css-1jd0a0t > img {
+    border-radius: 50%;
+    padding: 8px;
+    border: 1px #ccc solid;
+    background-color: white;
+}
+
+.MuiContainer-root.MuiContainer-maxWidthXs.css-c3mdrt-MuiContainer-root {
+    padding: 8px 0 !important;
+}
+
+.MuiBox-root.css-7texn5 {
+    width: 100%;
+}
+
+.MuiBox-root.css-1ag8nb {
+    flex-direction: row;
+}
+
+.css-7texn5 {
+    margin-top: 32px !important;
+}

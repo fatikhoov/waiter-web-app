@@ -17,15 +17,13 @@
 
 
 .App {
-  margin: var(--my-margin); 
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  gap: 32px;
-  overflow: hidden;
-  padding: 16px 8px;
+  align-items: center; 
+  overflow: hidden; 
+  padding: 0 8px;
 }
 
 .App-header {

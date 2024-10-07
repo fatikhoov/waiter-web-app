@@ -65,20 +65,19 @@ const theme = (mode) => createTheme({
   palette: {
     mode,
     primary: {
-      main: '#6E6E6E', // Капучино 001e3c
+      light: '#757ce8',
+      main: '#3f50b5',
+      dark: '#002884',
+      contrastText: '#fff',
     },
     secondary: {
-      main: '#F7F5F2', // Сливочный белый
-    },
-    background: {
-      default: '#fff', // Пудра F0E4D7 / Серый бежевый D8D2CB
-      paper: '#ccc',   // Серый
-    },
-    text: {
-      primary: '#3A3A3A', // Основной цвет текста
-      secondary: '#6E6E6E', // Вторичный цвет текста
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
     },
   },
+
   typography: {
     fontFamily: 'Roboto, sans-serif',
   },

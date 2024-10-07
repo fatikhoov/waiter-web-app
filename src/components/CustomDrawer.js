@@ -1,86 +1,91 @@
 import React from 'react';
-import { Drawer, IconButton, List, ListItem, Box, ListItemButton, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import { Drawer, IconButton, List, ListItem, Box, ListItemButton, ListItemText, Divider } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { MaterialUISwitch } from '../theme/theme';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { Link } from 'react-router-dom';
 
+import Button from '@mui/material/Button';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import TelegramIcon from '@mui/icons-material/Telegram';
+
+import Stack from '@mui/material/Stack';
 
 const CustomDrawer = ({ auth, open, toggleDrawer, user, isDarkMode, toggleTheme }) => {
- 
-  const isMobile = useMediaQuery('(min-width:600px)')
+  
 
   const DrawerList = (
-    <Box
-    sx={{ width: 320 }}
-    role="presentation">
-          <Divider />
-      <ListItem>
-      <span style={{ margin: '8px 0 0 16px', fontSize: '16px', fontWeight: 'bold' }}>МЕНЮ</span>
-    </ListItem>
+    <Box sx={{ width: 320, height: '100%' }} role="presentation">
+      <Divider />
+      <ListItem disablePadding>
+      <span style={{ margin: '24px 0 0 16px', fontSize: '16px', fontWeight: 'bold' }}>МЕНЮ</span>
+      </ListItem>
+      
       <List>
-        {['Главная', 'О приложении', 'Вход в ЛК', 'Получить доступ'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        <ListItem sx={{flexDirection: 'column', alignItems: 'flex-start'}}>
+          <Link to="/" style={{ textDecoration: 'none', color: '#222' }} onClick={toggleDrawer(false)}>
             <ListItemButton>
-           {isMobile && <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>}
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-
-
-        <ListItem disablePadding>
-          <Link to="/sign-in" style={{ textDecoration: 'none' }} onClick={toggleDrawer(false)}>
-            <ListItemButton>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Личный кабинет" />
+              <ListItemText secondary='Главная' />
             </ListItemButton>
           </Link>
-        </ListItem>
-        <ListItem disablePadding>
+        
           <Link
-            to="https://t.me/vladislav_fatikhov/?text=..."
-            style={{ textDecoration: 'none' }}
+            to="/about"
+            style={{ textDecoration: 'none', color: '#222' }}
           >
             <ListItemButton>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Получить доступ" />
+              <ListItemText secondary="О программе" />
             </ListItemButton>
           </Link>
+          <Link to="/" style={{ textDecoration: 'none', color: '#222' }} onClick={toggleDrawer(false)}>
+            <ListItemButton>
+              <ListItemText secondary='Контакты' />
+            </ListItemButton>
+          </Link>
+        
+        </ListItem>
+        </List>
+        <Divider/>
+        <List>
+        <ListItem>
+        <Stack style={{ padding: '16px' }} direction="column" width={'max-content'}  spacing='16px'>
+      <Button href="/sign-in" variant="outlined" startIcon={<AccountCircleIcon color="primary" fontSize="small" />}>
+        Войти в личный кабинет
+      </Button>
+      <Button href="https://t.me/vladislav_fatikhov?text=Хочу%20доступ%20в%личный%20кабинет%20приложения" variant="outlined" startIcon={<TelegramIcon color="primary" fontSize="small" />}>
+        Получить доступ
+      </Button>
+      </Stack>
         </ListItem>
       </List>
-     {/*  <Divider /> */}
-      <ListItem>
-      <span style={{ marginLeft: '16px', fontSize: '16px', fontWeight: 'bold' }}>НАСТРОЙКИ</span>
+      <Divider/>
+
+      <ListItem disablePadding>
+      <span style={{ margin: '24px 0 0 16px', fontSize: '16px', fontWeight: 'bold' }}>НАСТРОЙКИ</span>
       </ListItem>
-      <FormControlLabel
+<List>
+<ListItem>
+<FormControlLabel
         checked={isDarkMode}
         onChange={toggleTheme}
-        control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-        label={isDarkMode ? 'Светлая тема' : 'Темная тема'}
+        control={<MaterialUISwitch sx={{ marginLeft: '23px' }} defaultChecked />}
+        label={isDarkMode ? 'Тёмная тема' : 'Светлая тема'}
       />
+      </ListItem>
+</List>
     </Box>
   );
 
   return ( 
     <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
-     <IconButton
+      <IconButton
           color="inherit"
           aria-label="close drawer"
           onClick={toggleDrawer(false)}
           style={{ position: 'absolute', right: '8px', top: '8px', zIndex: 99 }}
           >
           <CloseIcon />
-        </IconButton>
+      </IconButton>
       {DrawerList}
     </Drawer> 
   );

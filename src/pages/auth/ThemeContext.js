@@ -5,9 +5,8 @@ import {
     InputLabel,
     OutlinedInput, 
     InputAdornment,
-    Link,
     Button,
-    IconButton,
+    IconButton
   } from '@mui/material'; 
   
 import Visibility from '@mui/icons-material/Visibility';
@@ -18,14 +17,13 @@ export const BRANDING = {
         <img
           src="/images/logo-signin.svg"
           alt="logo"
-          style={{ height: 80 }}
+          style={{ height: '64px' }}
         />
       ),
-    title: '', // Скрываем заголовок
+    title: ''
 };
 
 export const providers = [
-    { id: 'google', name: 'Google' },
     { id: 'credentials', name: 'Email and Password' },
 ];
 
@@ -38,12 +36,40 @@ function CustomButton() {
         size="small"
         disableElevation
         fullWidth
-        sx={{ my: 2 }} 
+        sx={{ my: 2 }}  
       >
         Войти
       </Button>
     );
   }
+// Кастомная кнопка отправки (submit)
+function CustomButtonLink1() {
+  return (
+    <Button
+      type="submit"
+      variant="text"
+      size="small"
+      disableElevation
+      sx={{ my: 2 }}  
+    >
+      Не помню пароль
+    </Button>
+  );
+}
+// Кастомная кнопка отправки (submit)
+function CustomButtonLink2() {
+  return (
+    <Button
+      type="submit"
+      variant="text"
+      size="small"
+      disableElevation
+      sx={{ my: 2 }}  
+    >
+      Новый аккаунт
+    </Button>
+  );
+}
 
 function CustomPasswordField(props) {
     const [showPassword, setShowPassword] = React.useState(false);
@@ -99,26 +125,13 @@ export const slotProps = {
     placeholder: 'Введите Ваш пароль',
     fullWidth: true,
     size: 'small',
-  },
-  submitButton: {
-    variant: 'contained',
-    color: 'primary',
-    loading: false, // Возможно, нужно установить флаг загрузки динамически
-  },
-  forgotPasswordLink: {
-    children: 'Забыли пароль?',
-    href: '#forgot-password',
-  },
-  signUpLink: {
-    children: 'Нет аккаунта? Регистрация',
-    href: '#sign-up',
-  },
+  }
 };
 
 export const slots = {
   emailField: TextField,
   passwordField: CustomPasswordField,
   submitButton: CustomButton,
-  forgotPasswordLink: Link,
-  signUpLink: Link,
+  forgotPasswordLink: CustomButtonLink1,
+  signUpLink: CustomButtonLink2
 };

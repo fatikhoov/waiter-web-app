@@ -9,24 +9,24 @@ const CustomAppBar = ({ open, handleLogout, toggleDrawer, auth, user, isDarkMode
   return (
     <AppBar position="fixed" open={open}>
       <Toolbar>
-        <IconButton
+       {!auth && <IconButton
           color="inherit"
           aria-label="open drawer"
           onClick={toggleDrawer(true)} 
           edge="start" 
           >
           <MenuIcon />
-        </IconButton>
+        </IconButton>}
         <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
           ОФИК В БАЛАНСЕ
         </Typography> 
-          <AccountSlots
+         {auth && <AccountSlots
             auth={auth}
             user={user}
             handleLogout={handleLogout}
             toggleTheme={toggleTheme}
             isDarkMode={isDarkMode}
-          /> 
+          /> }
       </Toolbar>
     </AppBar>
   );

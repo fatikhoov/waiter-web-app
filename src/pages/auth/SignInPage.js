@@ -1,8 +1,8 @@
 import { AppProvider, SignInPage } from '@toolpad/core'; 
 import { useTheme } from '../../theme/theme'; // Импорт хука для управления темой
-import { Box } from '@mui/material';
 import { BRANDING, providers, slotProps, slots } from './ThemeContext';
-import { useNavigate } from 'react-router-dom'; // Импортируем хук useNavigate 
+import { useNavigate } from 'react-router-dom'; // Импортируем хук useNavigate
+import './style.css' 
   
 const SignInPageComponent = ({ auth, handleIsAuth, handleLogout, user, toggleTheme, isDarkMode }) => {
   const theme = useTheme(isDarkMode); // Получаем объект темы в зависимости от режима
@@ -17,31 +17,17 @@ const SignInPageComponent = ({ auth, handleIsAuth, handleLogout, user, toggleThe
         });
         await promise; // Ожидаем завершения обещания
         navigate('/'); // Перенаправляем на главную страницу после авторизации
-        
-        console.log(`Sign in with ${provider.name}`);
+        alert(`Sign in with ${provider.name}`);
       };
  
   return (
     <AppProvider branding={BRANDING} theme={theme}>
-      
-        <Box
-          sx={{
-            width: '100%',
-            maxWidth: 400, // максимальная ширина формы
-            p: 3, // отступы
-            boxShadow: 3, // тень
-            borderRadius: 2, // скругленные углы
-            backgroundColor: 'background.paper',
-          }}
-        >
       <SignInPage
         signIn={signIn}
         providers={providers}
         slotProps={slotProps}
         slots={slots}
       />
-      </Box>
-
     </AppProvider>
   );
 };
